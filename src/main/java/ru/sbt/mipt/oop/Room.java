@@ -1,6 +1,7 @@
-package ru.sbt.mipt.oop;
 
-import java.util.Collection;
+        package ru.sbt.mipt.oop;
+
+        import java.util.Collection;
 
 public class Room {
     private Collection<Light> lights;
