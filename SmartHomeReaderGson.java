@@ -9,7 +9,8 @@ import java.nio.file.Paths;
 
 public class SmartHomeReaderGson implements SmartHomeReader {
     final private String filename;
-    public SmartHomeReaderGson (String filename){
+
+    public SmartHomeReaderGson(String filename) {
         this.filename = filename;
     }
 
