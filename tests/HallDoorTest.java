@@ -13,11 +13,11 @@ public class HallDoorTest {
     public void halltest1() throws IOException {
         SmartHomeReader smartHomeReader = new SmartHomeReaderGson("smart-home-1.js");
         SmartHome smartHome = smartHomeReader.readSmartHome();
-        EventDealer eventDealer = new DoorHallEventProcessor();
+        EventProcessor eventDealer = new DoorHallEventProcessor();
         SensorEvent event = new SensorEvent(DOOR_CLOSED, "4");
         for (Room room: smartHome.getRooms()) {
             for (Door door : room.getDoors()) {
-                eventDealer.dealwithEvent(smartHome, event, room, door);
+                eventDealer.dealwithEvent(smartHome, event);
             }
         }
         for (Room room: smartHome.getRooms()) {
@@ -28,13 +28,13 @@ public class HallDoorTest {
     }
     @Test
     public void halltest2() throws IOException {
-        SmartHomeReader smartHomeReader = new SmartHomeReaderGson("C:\\Users\\mi\\Desktop\\smart-home-1.js");
+        SmartHomeReader smartHomeReader = new SmartHomeReaderGson("smart-home-1.js");
         SmartHome smartHome = smartHomeReader.readSmartHome();
-        EventDealer eventDealer = new DoorHallEventProcessor();
+        EventProcessor eventDealer = new DoorHallEventProcessor();
         SensorEvent event = new SensorEvent(DOOR_OPEN, "4");
         for (Room room: smartHome.getRooms()) {
             for (Door door : room.getDoors()) {
-                eventDealer.dealwithEvent(smartHome, event, room, door);
+                eventDealer.dealwithEvent(smartHome, event);
             }
         }
         for (Room room: smartHome.getRooms()) {
