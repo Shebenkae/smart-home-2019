@@ -1,9 +1,8 @@
+package ru.sbt.mipt.oop;
 
-        package ru.sbt.mipt.oop;
+import java.util.Collection;
 
-        import java.util.Collection;
-
-public class Room implements Actionable{
+public class Room implements Actionable {
     private Collection<Light> lights;
     private Collection<Door> doors;
     private String name;
@@ -27,10 +26,17 @@ public class Room implements Actionable{
     }
 
     public void execute(Action action) {
-        for (Light light:lights){
-            action.act(this, light);}
-        for (Door door:doors){
-            action.act(this, door);
+        if (action.getName().equals("light"))
+         {
+            for (Light light : lights) {
+                action.act(light, name);
+            }
+        }
+
+        if (action.getName().equals("door")) {
+            for (Door door : doors) {
+                action.act(door, name);
+            }
         }
     }
 }

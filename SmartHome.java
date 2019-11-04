@@ -1,9 +1,21 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.alarm.Alarm;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class SmartHome implements Actionable {
+    Alarm alarm;
+
+    public void setAlarm(Alarm alarm){
+        this.alarm = alarm;
+    }
+
+    public Alarm getAlarm(){
+        return alarm;
+    }
+
     private final Collection<Room> rooms;
 
     public SmartHome() {
@@ -24,7 +36,7 @@ public class SmartHome implements Actionable {
 
     @Override
     public void execute(Action action) {
-        for (Room room: rooms){
+        for (Room room : rooms) {
             room.execute(action);
         }
     }
