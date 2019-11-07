@@ -1,19 +1,13 @@
 package ru.sbt.mipt.oop;
 
-public class DoorHallEventProcessor implements EventDealer {
+public class DoorHallEventProcessor implements EventProcessor {
     @Override
-    public void dealwithEvent(SmartHome home, SensorEvent event, Room room, Object obj) {
-        if (obj instanceof Door) {
-            Door door = (Door) obj;
-            if (door.getId().equals(event.getObjectId()) && event.getType() == SensorEventType.DOOR_CLOSED && room.getName().equals("hall")) {
-                                    for (Room homeroom: home.getRooms())
-                                    for (Light light : homeroom.getLights()) {
-                                        light.setOn(false);
-                                        SensorCommand command = new SensorCommand(CommandType.LIGHT_OFF, light.getId());
-                                        CommandSender sender = new CommandSender();
-                                        sender.sendCommand(command);
-                                    }
-                                }
-                            }
-                        }
-                    }
+    public void dealwithEvent(SmartHome home, SensorEvent event) {
+        if (event.getType() == SensorEventType.DOOR_CLOSED && event.getObjectId().equals("4")) {
+            Action<Light> hallaction = new ActionLightOff("all");
+            home.execute(hallaction);
+            Action<Door> doorAction = new ActionCloseDoor(event.getObjectId());
+            home.execute(doorAction);
+        }
+    }
+}
