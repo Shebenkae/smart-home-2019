@@ -7,15 +7,17 @@ public class AlarmDeactive extends AlarmState {
     }
 
     @Override
-    public void activatealarm(String pass) {
-        if (alarm.getCode().equals(pass)) {
-            alarm.activatealarm();
-        }
-
+    public void activateAlarm(String pass) {
+        alarm.activateAlarm();
     }
 
     @Override
-    public void deactivatealarm(String pass) {
+    public void alarmDanger() {
+        alarm.alarmDanger();
+    }
+
+    @Override
+    public void deactivateAlarm(String pass) {
         System.out.println("Alarm was actually deactivated before");
     }
 }

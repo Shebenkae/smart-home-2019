@@ -7,12 +7,18 @@ public class AlarmDanger extends AlarmState {
     }
 
     @Override
-    public void activatealarm(String pass) {
+    public void activateAlarm(String pass) {
 
     }
 
     @Override
-    public void deactivatealarm(String pass) {
+    public void alarmDanger() {
 
+    }
+
+    @Override
+    public void deactivateAlarm(String pass) {
+    if (alarm.getCode().equals(pass))
+        alarm.deactivateAlarm();
     }
 }

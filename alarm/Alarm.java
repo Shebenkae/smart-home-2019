@@ -8,6 +8,7 @@ public class Alarm {
     public Alarm(String initcode) {
         this.code = initcode;
         isActive = false;
+        alarmState = new AlarmDeactive(this);
     }
 
     public AlarmState getAlarmState() {
@@ -18,17 +19,17 @@ public class Alarm {
         return code;
     }
 
-    public void activatealarm() {
+    public void activateAlarm() {
         isActive = true;
         alarmState = new AlarmActive(this);
     }
 
-    public void deactivatealarm() {
+    public void deactivateAlarm() {
         isActive = false;
         alarmState = new AlarmDeactive(this);
     }
 
-    public void alarmdanger() {
+    public void alarmDanger() {
         alarmState = new AlarmDanger(this);
     }
 }

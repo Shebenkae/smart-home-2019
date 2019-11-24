@@ -1,5 +1,8 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.Actions.Action;
+import ru.sbt.mipt.oop.Actions.Actionable;
+
 import java.util.Collection;
 
 public class Room implements Actionable {
@@ -26,17 +29,12 @@ public class Room implements Actionable {
     }
 
     public void execute(Action action) {
-        if (action.getName().equals("light"))
-         {
-            for (Light light : lights) {
-                action.act(light, name);
-            }
+        action.act(this);
+        for (Light lights : lights) {
+            lights.execute(action);
         }
-
-        if (action.getName().equals("door")) {
-            for (Door door : doors) {
-                action.act(door, name);
-            }
+        for (Door doors : doors) {
+            doors.execute(action);
         }
     }
 }

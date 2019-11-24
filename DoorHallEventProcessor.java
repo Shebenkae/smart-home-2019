@@ -1,11 +1,32 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.Actions.Action;
+import ru.sbt.mipt.oop.Actions.ActionCloseDoor;
+import ru.sbt.mipt.oop.Actions.ActionLightOff;
+import ru.sbt.mipt.oop.Actions.ActionTurnOffAllLights;
+
+import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
+
 public class DoorHallEventProcessor implements EventProcessor {
     @Override
     public void dealwithEvent(SmartHome home, SensorEvent event) {
-        if (event.getType() == SensorEventType.DOOR_CLOSED && event.getObjectId().equals("4")) {
-            Action<Light> hallaction = new ActionLightOff("all");
-            home.execute(hallaction);
-        }
+        home.execute((object) -> {
+            if (event.getType() == DOOR_CLOSED) {
+                if (object instanceof Room) {
+                    Room room = (Room) object;
+                    room.execute(obj -> {
+                        if (obj instanceof Door){
+                            Door door = (Door) obj;
+                            if (door.getId().equals(event.getObjectId())){
+                                if (room.getName().equals("hall")) {
+                                    Action hallaction = new ActionTurnOffAllLights();
+                                    home.execute(hallaction);
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
     }
 }
