@@ -1,29 +1,21 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.Actions.Action;
+import ru.sbt.mipt.oop.Actions.ActionLightOff;
+import ru.sbt.mipt.oop.Actions.ActionLightOn;
+
 import static ru.sbt.mipt.oop.SensorEventType.LIGHT_OFF;
 import static ru.sbt.mipt.oop.SensorEventType.LIGHT_ON;
 
-public class LightEventProcessor implements EventDealer {
+public class LightEventProcessor implements EventProcessor {
     @Override
-    public void dealwithEvent(SmartHome home, SensorEvent event, Room room, Object obj) {
-    if (obj instanceof Light){
-        Light light = (Light) obj;
-                if (light.getId().equals(event.getObjectId())) {
-                    if (event.getType() == LIGHT_ON) {
-                        onLights(light, room);
-                    } else
-                    {
-                offLights(light, room);}
-                }
-            }
+    public void dealwithEvent(SmartHome home, SensorEvent event) {
+        if (event.getType() == LIGHT_ON) {
+            Action lightAction = new ActionLightOn(event.getObjectId());
+            home.execute(lightAction);
+        } else if (event.getType() == LIGHT_OFF) {
+            Action lightAction = new ActionLightOff(event.getObjectId());
+            home.execute(lightAction);
         }
-
-    private void onLights (Light light, Room room){
-        light.setOn(true);
-        System.out.println("Light " + light.getId() + " in room " + room.getName() + " was turned on.");
-    }
-    private void offLights (Light light, Room room){
-        light.setOn(false);
-        System.out.println("Light " + light.getId() + " in room " + room.getName() + " was turned off.");
     }
 }

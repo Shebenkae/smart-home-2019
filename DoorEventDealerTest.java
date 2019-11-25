@@ -33,15 +33,19 @@ public class DoorEventDealerTest {
 
     @Test
     public void doortest2() throws IOException {
-    SmartHomeReader smartHomeReader = new SmartHomeReaderGson("C:\\Users\\mi\\Desktop\\smart-home-1.js");
+    SmartHomeReader smartHomeReader = new SmartHomeReaderGson("smart-home-1.js");
     SmartHome smartHome = smartHomeReader.readSmartHome();
         EventProcessor eventDealer = new DoorEventProcessor();
-    SensorEvent event = new SensorEvent(DOOR_CLOSED, "1");
-    eventDealer.dealwithEvent(smartHome, event);
+    SensorEvent event = new SensorEvent(DOOR_OPEN, "3");
+        for (Room room: smartHome.getRooms()) {
+            for (Door door : room.getDoors()) {
+                eventDealer.dealwithEvent(smartHome, event);
+            }
+        }
         for (Room room: smartHome.getRooms()) {
             for (Door door : room.getDoors()) {
                 if (door.getId().equals(event.getObjectId()))
-                Assert.assertTrue(!door.isOpen() && door.getId().equals("1"));
+                assert(door.isOpen() || door.getId().equals("3"));;
             }
         }
     }
