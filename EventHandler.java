@@ -1,6 +1,5 @@
 package ru.sbt.mipt.oop;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 public class EventHandler {
@@ -17,7 +16,7 @@ public class EventHandler {
         while (event != null) {
             System.out.println("Got event: " + event);
             for (EventProcessor eve : events) {
-                eve.dealwithEvent(home, event);
+                eve.dealWithEvent(home, event);
             }
             event = new RandomEvent().getNextEvent();
         }
