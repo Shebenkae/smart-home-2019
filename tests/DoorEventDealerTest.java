@@ -16,7 +16,7 @@ public class DoorEventDealerTest {
            SmartHome smartHome = smartHomeReader.readSmartHome();
            SensorEvent event = new SensorEvent(DOOR_OPEN, "3");
            DoorEventProcessor handler = new DoorEventProcessor();
-           handler.dealwithEvent(smartHome, event);
+           handler.dealWithEvent(smartHome, event);
            for(Room room: smartHome.getRooms()) {
                String current = room.getName();
                if(current.equals("bathroom")) {
@@ -37,7 +37,7 @@ public class DoorEventDealerTest {
     SmartHome smartHome = smartHomeReader.readSmartHome();
         EventProcessor eventDealer = new DoorEventProcessor();
     SensorEvent event = new SensorEvent(DOOR_CLOSED, "1");
-    eventDealer.dealwithEvent(smartHome, event);
+    eventDealer.dealWithEvent(smartHome, event);
         for (Room room: smartHome.getRooms()) {
             for (Door door : room.getDoors()) {
                 if (door.getId().equals(event.getObjectId()))

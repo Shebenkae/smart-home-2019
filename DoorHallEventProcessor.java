@@ -9,7 +9,7 @@ import static ru.sbt.mipt.oop.SensorEventType.DOOR_CLOSED;
 
 public class DoorHallEventProcessor implements EventProcessor {
     @Override
-    public void dealwithEvent(SmartHome home, SensorEvent event) {
+    public void dealWithEvent(SmartHome home, SensorEvent event) {
         home.execute((object) -> {
             if (event.getType() == DOOR_CLOSED) {
                 if (object instanceof Room) {

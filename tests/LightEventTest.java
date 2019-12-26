@@ -1,6 +1,5 @@
 package ru.sbt.mipt.oop.tests;
 
-import org.junit.Assert;
 import org.junit.Test;
 import ru.sbt.mipt.oop.*;
 
@@ -15,7 +14,7 @@ public class LightEventTest {
         SmartHome smartHome = smartHomeReader.readSmartHome();
         EventProcessor eventDealer = new LightEventProcessor();
         SensorEvent event = new SensorEvent(LIGHT_ON, "3");
-                eventDealer.dealwithEvent(smartHome, event);
+                eventDealer.dealWithEvent(smartHome, event);
         for (Room room: smartHome.getRooms()) {
             for (Light light : room.getLights()) {
                 if (light.getId().equals(event.getObjectId()))
@@ -30,7 +29,7 @@ public class LightEventTest {
         SmartHome smartHome = smartHomeReader.readSmartHome();
         EventProcessor eventDealer = new LightEventProcessor();
         SensorEvent event = new SensorEvent(LIGHT_OFF, "1");
-                eventDealer.dealwithEvent(smartHome, event);
+                eventDealer.dealWithEvent(smartHome, event);
         for (Room room: smartHome.getRooms()) {
             for (Light light : room.getLights()) {
                 if (light.getId().equals(event.getObjectId()))
